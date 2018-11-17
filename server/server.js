@@ -3,28 +3,29 @@ const app = express()
 const bodyParser = require('body-parser')
 require('./config/config')
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get('/usuario', function(req, res) {
-    res.json('Hola mundo - getUsuario')
+    res.json('getUsuario')
 })
 
-app.post('/usuario', function(req, res) { // AÑADIR REGISTROS
+app.post('/usuario', function(req, res) {
     let body = req.body;
     if (body.nombre === undefined) {
         res.status(400).json({
-            OK: false,
-            mensaje: 'El nombre del usuario es necesario'
+            ok: false,
+            mensaje: 'El campo Nombre es requerido'
         })
-
     } else {
-        res.json(body)
+        res.json({
+            persona: body
+        })
     }
 
 })
 
-app.put('/usuario/:id', function(req, res) { // ACTUALIZAR
+app.put('/usuario/:id', function(req, res) {
     let id = req.params.id;
     res.json({
         id
@@ -32,7 +33,9 @@ app.put('/usuario/:id', function(req, res) { // ACTUALIZAR
 })
 
 app.delete('/usuario', function(req, res) {
-    res.json('DELETEusuario')
+    res.json('deleteUsuario')
 })
 
-app.listen(process.env.PORT, () => console.log(`Escuchando el puerto : ${process.env.PORT}`));
+app.listen(process.env.PORT, () => {
+    console.log('Escuchando el puerto :', process.env.PORT);
+})
