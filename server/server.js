@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(require('./routes/usuario'));
+app.use(require('./routes/index'));
 
 app.listen(process.env.PORT, () => {
     console.log('Escuchando el puerto :', process.env.PORT);
